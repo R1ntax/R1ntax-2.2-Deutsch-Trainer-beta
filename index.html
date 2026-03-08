@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>R1ntax – Deutsch Trainer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <video id="bgVideo" autoplay muted loop playsinline>
+    <source src="media/background.mp4" type="video/mp4" />
+  </video>
+  <canvas id="particles"></canvas>
+  <audio id="bgMusic" src="media/music.mp3" loop></audio>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <h1>R1ntax – Deutsch Trainer</h1>
+      <div id="userBadge" class="user-badge hidden">
+        <img id="rankIcon" src="icons/rank1.png" alt="Rank" width="64" height="64" />
+        <div>
+          <div id="playerName">Gast</div>
+          <div id="rankLabel">Anfänger</div>
+          <div id="xpLabel">XP: 0 • Lv. 1</div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="authPanel" class="panel center">
+        <h2>Starte dein Training</h2>
+        <p>Melde dich mit Google an, um Fortschritt, Duelle und Rangliste zu speichern.</p>
+        <button id="loginBtn" class="btn primary">Mit Google anmelden</button>
+        <p class="hint">Tipp: Nach dem Login startet Musik automatisch (Browser erlaubt nach Interaktion).</p>
+      </section>
+
+      <section id="menuPanel" class="panel hidden">
+        <h2>Modus wählen</h2>
+        <div class="menu-grid">
+          <button id="studyModeBtn" class="btn">📚 Karten-Training</button>
+          <button id="duelModeBtn" class="btn">⚔️ Online-Duell</button>
+          <button id="myWordsModeBtn" class="btn">✏️ Meine Wörter</button>
+        </div>
+        <div class="stats-grid">
+          <div class="chip">🔥 Streak: <span id="streakLabel">0</span></div>
+          <div class="chip">🎯 Daily XP: <span id="dailyLabel">0 / 30</span></div>
+          <div class="chip">🧰 Chests: <span id="chestLabel">0</span></div>
+        </div>
+      </section>
+
+      <section id="studyPanel" class="panel hidden">
+        <div class="panel-head">
+          <h2>Karten-Training (4 Wörter pro Runde)</h2>
+          <button class="btn ghost back-menu">Zurück</button>
+        </div>
+        <div id="feedback"></div>
+        <div id="cardsGrid" class="cards-grid"></div>
+      </section>
+
+      <section id="myWordsPanel" class="panel hidden">
+        <div class="panel-head">
+          <h2>Meine Wörter (max. 50)</h2>
+          <button class="btn ghost back-menu">Zurück</button>
+        </div>
+        <div class="row">
+          <input id="germanInput" type="text" placeholder="Deutsch" maxlength="40" />
+          <input id="translationInput" type="text" placeholder="Перевод" maxlength="60" />
+          <button id="addWordBtn" class="btn">+ Hinzufügen</button>
+        </div>
+        <div id="myWordsCount" class="hint"></div>
+        <ul id="myWordsList" class="list"></ul>
+      </section>
+
+      <section id="duelPanel" class="panel hidden">
+        <div class="panel-head">
+          <h2>Online-Duell</h2>
+          <button class="btn ghost back-menu">Zurück</button>
+        </div>
+        <div id="duelStatus" class="hint">Suche Gegner…</div>
+        <button id="findDuelBtn" class="btn">Duell suchen</button>
+        <div id="duelBoard" class="duel-board hidden">
+          <div>Du: <span id="myScore">0</span></div>
+          <div>Gegner: <span id="enemyScore">0</span></div>
+          <div>Zeit: <span id="duelTimer">45</span>s</div>
+        </div>
+        <div id="duelWordCard" class="duel-word"></div>
+        <div id="duelOptions" class="options"></div>
+      </section>
+
+      <section id="leaderPanel" class="panel">
+        <h2>🏆 Leaderboard (Top 100)</h2>
+        <ol id="leaderboard" class="leaderboard"></ol>
+      </section>
+
+      <section id="devPanel" class="panel">
+        <h2>🛠️ Developer Panel</h2>
+        <div id="onlineSummary" class="hint">Online: 0</div>
+        <div id="onlineList" class="dev-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
